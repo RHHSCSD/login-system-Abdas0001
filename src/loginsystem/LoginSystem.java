@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package loginsystem;
 
 import java.io.*;
@@ -12,21 +8,35 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author michael.roy-diclemen
+ * Manages user login and authentication.
  */
 public class LoginSystem {
 
+    // Reference to the RegisterUser instance
     private RegisterUser registerUser;
 
+    /**
+     * Constructor to initialize LoginSystem with a RegisterUser instance.
+     * @param registerUser The RegisterUser object for user data management.
+     */
     public LoginSystem(RegisterUser registerUser) {
         this.registerUser = registerUser;
     }
     
+    /**
+     * Default constructor for LoginSystem.
+     */
     public LoginSystem() {
     }
 
-    
+    /**
+     * Validates user login by checking credentials from file.
+     * @param username The username for login.
+     * @param password The password for login.
+     * @return True if login is successful, false otherwise.
+     * @throws IOException If an I/O error occurs while reading from file.
+     * @throws NoSuchAlgorithmException If MD5 algorithm is not available.
+     */
     public static boolean loginFromFile(String username, String password) throws IOException, NoSuchAlgorithmException {
         String hashedPassword = hashPassword(password);
 
@@ -47,6 +57,12 @@ public class LoginSystem {
         return false;
     }
 
+    /**
+     * Hashes the given password using MD5 algorithm.
+     * @param password The password to hash.
+     * @return The hashed password.
+     * @throws NoSuchAlgorithmException If MD5 algorithm is not available.
+     */
     private static String hashPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(password.getBytes());
@@ -60,7 +76,8 @@ public class LoginSystem {
     }
     
     /**
-     * @param args the command line arguments
+     * Main method to test the login functionality.
+     * @param args The command-line arguments (not used).
      */
     public static void main(String[] args) {
         
